@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#17a7cf</color>
+    <color name="colorPrimaryDark">#097897</color>
+    <color name="colorAccent">#17a7cf</color>
+    <color name="googleButtonColor">#e11818</color>
+    <color name="facebookButtonColor">#1a53ce</color>
+    <color name="genericButtonColor">#17a7cf</color>
+    <color name="AccentGenericButtonColor">#097897</color>
+</resources>

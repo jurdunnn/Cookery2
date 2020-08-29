@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+
+    android:id="@+id/contentRecipesCoord"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:toolbarId="@+id/toolbar"
+
+            >
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="eatec.cookery.RecipesActivity"
+                tools:showIn="@layout/activity_recipes">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/filterContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:padding="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/filters"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView3">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/veganCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:onClick="setVeganCard"
+                            app:cardCornerRadius="0dp"
+                            app:contentPadding="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/vegCard"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/veganText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Vegan"
+                                android:textAlignment="center"
+                                android:textStyle="bold" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/noneCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:onClick="setNoneCard"
+                            app:cardCornerRadius="0dp"
+                            app:contentPadding="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/fishCard"
+                            app:layout_constraintTop_toTopOf="@+id/fishCard">
+
+                            <TextView
+                                android:id="@+id/noneText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="No Filter"
+                                android:textAlignment="center"
+                                android:textAllCaps="false"
+                                android:textStyle="bold" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/fishCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:onClick="setFishCard"
+                            app:cardCornerRadius="0dp"
+                            app:contentPadding="10dp"
+                            app:layout_constraintEnd_toStartOf="@+id/noneCard"
+                            app:layout_constraintStart_toEndOf="@+id/vegCard"
+                            app:layout_constraintTop_toTopOf="@+id/vegCard">
+
+                            <TextView
+                                android:id="@+id/fishText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Pescetarian"
+                                android:textAlignment="center"
+                                android:textStyle="bold" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/vegCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:elevation="10dp"
+                            android:onClick="setVegetarianCard"
+                            android:padding="20dp"
+                            app:cardCornerRadius="0dp"
+                            app:contentPadding="10dp"
+                            app:layout_constraintEnd_toStartOf="@+id/fishCard"
+                            app:layout_constraintStart_toEndOf="@+id/veganCard"
+                            app:layout_constraintTop_toTopOf="@+id/veganCard">
+
+                            <TextView
+                                android:id="@+id/vegText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Vegetarian"
+                                android:textAlignment="center"
+                                android:textStyle="bold" />
+                        </androidx.cardview.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:elevation="10dp"
+                        app:cardCornerRadius="0dp"
+                        app:contentPadding="0dp"
+                        app:layout_constraintBottom_toTopOf="@+id/filters"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <EditText
+                            android:id="@+id/SearchBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:drawable/screen_background_light_transparent"
+                            android:drawableLeft="@android:drawable/ic_menu_search"
+                            android:ems="10"
+                            android:hint="@android:string/search_go"
+                            android:inputType="textPersonName"
+                            android:padding="5dp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            app:cardCornerRadius="0dp">
+
+                            <Button
+                                android:id="@+id/searchBarButton"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="@android:string/search_go"
+                                android:textAlignment="center"
+                                android:textColor="@color/genericButtonColor"
+                                android:textStyle="bold" />
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipeRView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

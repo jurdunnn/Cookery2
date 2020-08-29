@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "717151815939",
+    "firebase_url": "https://cookery-ab83b.firebaseio.com",
+    "project_id": "cookery-ab83b",
+    "storage_bucket": "cookery-ab83b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717151815939:android:aec792e0e1d8fcda7c0136",
+        "android_client_info": {
+          "package_name": "eatec.cookery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717151815939-7v78gbn95gjgn2ebjdpjt12fe10ttu41.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eatec.cookery",
+            "certificate_hash": "234aaa38d775f43133d167c3a24eb7e18cef407c"
+          }
+        },
+        {
+          "client_id": "717151815939-bcfqdhi50rrj3o2a4rgj6sibpkb8klku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADPrfsD0viuYBXb0ARgEscIulEClB0TKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717151815939-bcfqdhi50rrj3o2a4rgj6sibpkb8klku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

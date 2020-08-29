@@ -2,7 +2,6 @@ package eatec.cookery;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,25 +19,30 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
+/*This class is the adapter of the comment recycler view.*/
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
     private String mPostID;
-    private List<comment> mComments;
-    private ArrayList<String> mKeys = new ArrayList<>();
+    private List<comment> mComments; //To store the content of each comment.
+    private ArrayList<String> mKeys = new ArrayList<>(); //To store the indexes of each comment in the list
 
-    private Context mContext;
+    private Context mContext; //Context (current activity)
+
     private DatabaseReference userRef;
     private DatabaseReference commentsRef;
 
-    public CommentAdapter(List<comment> comments, String postID){
+    /*Constructor to call the commentAdapter class, passing a list of comments - and the posts ID.*/
+    public CommentAdapter(List<comment> comments, String postID) {
         mComments = comments;
         mPostID = postID;
         commentsRef = FirebaseDatabase.getInstance().getReference("comments").child(postID);
         commentsRef.addChildEventListener(new CommentAdapter.CommentChildEventListener());
     }
 
+    /*Event listener to constantly update comments on their current state*/
     class CommentChildEventListener implements ChildEventListener {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -81,7 +85,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
     }
 
-
+    /*View Holder class, used to assign views to callable local variables*/
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mCommentContent;
@@ -96,17 +100,19 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
     }
 
+    /*Inflate the view*/
     @Override
     public CommentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
-        View recipeView = inflater.inflate(R.layout.fragment_comment,parent,false);
+        View recipeView = inflater.inflate(R.layout.fragment_comment, parent, false);
 
         CommentAdapter.ViewHolder viewHolder = new CommentAdapter.ViewHolder(recipeView);
         return viewHolder;
     }
 
+    /*Define the parameters for which the data will be shown.*/
     @Override
     public void onBindViewHolder(final CommentAdapter.ViewHolder holder, final int position) {
         comment comment = mComments.get(position);
@@ -115,19 +121,27 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         final ImageView imageview = holder.mCommentProfilePicture;
         final TextView username = holder.mCommentUserName;
+
+        /*Get the user in order to grab their profile picture and display it next to their comment.
+         * Due to comment.class not including the users profile picture just their UID.
+         * TODO: To reduce network usage, include the link to the users profile picture in the comment.class*/
         userRef = FirebaseDatabase.getInstance().getReference("users").child(comment.getUserID());
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                /*Get user*/
                 final user user = dataSnapshot.getValue(user.class);
                 final String userID = user.getUserID();
+                /*Load profile picture*/
                 Picasso.get().load(user.getProfilePicture()).placeholder(R.drawable.ic_account_circle_black_24dp).transform(new CropCircleTransformation()).into(imageview);
                 username.setText(user.getUserName());
+                /*On click listener to take the user to the selected
+                 * users profile.*/
                 imageview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent mIntent = new Intent(mContext, ViewUserProfile.class);
-                        mIntent.putExtra("userID", userID);
+                        mIntent.putExtra("userID", userID); //Put passes the userID, in order to show the correct profile.
                         mContext.startActivity(mIntent);
                     }
                 });
@@ -139,9 +153,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             }
         });
 
+        //Comment content
         content.setText(comment.getComment());
     }
 
+    /*Get the total size of the comments list for the recipe.*/
     @Override
     public int getItemCount() {
         return mComments.size();

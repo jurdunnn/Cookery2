@@ -17,7 +17,7 @@ public class cardAdapter extends PagerAdapter {
     private List<step> steps;
     private LayoutInflater layoutInflater;
     private Context context;
-    //dasikdj
+
     public cardAdapter(List<step> steps, Context context) {
         this.steps = steps;
         this.context = context;

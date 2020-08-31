@@ -2,9 +2,6 @@ package eatec.cookery;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,10 +9,19 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+/*This activity is responsible for showing the users their personal favourite recipes.*/
+/*TODO:
+ *  1. give ability to filter favourite list
+ *  2. give ability to search favourite list*/
 public class FavouritesActivity extends AppCompatActivity {
     private List<recipe> listRecipesList;
     private RecyclerView viewRecipeList;
     private FavouritesAdapter favouritesAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,15 +30,17 @@ public class FavouritesActivity extends AppCompatActivity {
         //Highlight the home buttons to indicated current page;
         highlightMenuIcon();
 
+        //feedback button as this is a main activity.
         Button feedbackButton = findViewById(R.id.feedbackButton);
         feedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(FavouritesActivity.this, FeedbackActivity.class));
-                overridePendingTransition(0,0);
+                overridePendingTransition(0, 0);
             }
         });
 
+        //Populate the recycler view with favourite recipes.
         listRecipesList = new ArrayList<>();
         viewRecipeList = findViewById(R.id.favouritesRView);
         favouritesAdapter = new FavouritesAdapter(listRecipesList);
@@ -41,6 +49,8 @@ public class FavouritesActivity extends AppCompatActivity {
         viewRecipeList.setAdapter(favouritesAdapter);
     }
 
+    /*Highlight the favourite icon at the bottom of the screen
+     * to indicate that this the current activity.*/
     public void highlightMenuIcon() {
         ImageView socialButton = findViewById(R.id.socialButton);
         socialButton.setImageResource(R.drawable.friends);
@@ -57,26 +67,36 @@ public class FavouritesActivity extends AppCompatActivity {
         ImageView myRecipesButton = findViewById(R.id.myRecipesButton);
         myRecipesButton.setImageResource(R.drawable.book);
     }
+
+    /*Open the creator activity*/
     public void openCreatorActivity(View view) {
         startActivity(new Intent(FavouritesActivity.this, CreatorActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
+    /*Open the social activity*/
     public void openSocialActivity(View view) {
         startActivity(new Intent(FavouritesActivity.this, SocialActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
+    /*Open the search activity.*/
     public void openRecipesActivity(View view) {
         startActivity(new Intent(FavouritesActivity.this, RecipesActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
+    /*Open the home activity.*/
     public void openHomeActivity(View view) {
         startActivity(new Intent(FavouritesActivity.this, MainActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
+    /*todo: ???*/
     public void openFavouritesActivity(View view) {
     }
 }

@@ -1,8 +1,6 @@
 package eatec.cookery;
 
-/**
- * Created by Jurdun-PC on 18/02/2020.
- */
+/*This class is responsible for setting and getting the recipes.*/
 
 public class recipe {
     private String recipeID;
@@ -14,8 +12,11 @@ public class recipe {
     private String recipeImage;
     private int reports;
 
-    public recipe() {}
+    /*blank constructor*/
+    public recipe() {
+    }
 
+    /*main constructor*/
     public recipe(String recipeID, String userID, String recipeName, String recipeDescription, String tags, String privacy, String recipeImage, int reports) {
         this.recipeID = recipeID;
         this.userID = userID;
@@ -27,25 +28,42 @@ public class recipe {
         this.reports = reports;
     }
 
+    /*get the recipes ID*/
     public String getRecipeID() {
         return recipeID;
     }
+
+    /*get the user whom created the recipes ID*/
     public String getUserID() {
         return userID;
     }
+
+    /*get the recipe name*/
     public String getRecipeName() {
         return recipeName;
     }
+
+    /*get the recipe description*/
     public String getRecipeDescription() {
         return recipeDescription;
     }
+
+    /*get the recipes image*/
     public String getRecipeImage() {
         return recipeImage;
     }
-    public int getReports() {return reports;}
+
+    /*get the number of reports associated with this recipe.*/
+    public int getReports() {
+        return reports;
+    }
+
+    /*get the tags vegan, veg etc...*/
     public String getTags() {
         return tags;
     }
+
+    /*get the privacy status of this recipe, private or public?*/
     public String getPrivacy() {
         return privacy;
     }

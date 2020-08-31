@@ -23,7 +23,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import androidx.annotation.NonNull;
 
 /**
- * Demonstrate Firebase Authentication using a Google ID Token.
+ * TODO: EVERYTHING HERE.
  */
 public class GoogleSignInActivity extends MainActivity implements
         View.OnClickListener {

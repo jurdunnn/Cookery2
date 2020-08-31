@@ -41,25 +41,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
-
+/*This activity is the main activity to show the user their personal feed, which
+ * is dictated by what they follow. This will show the posts made by the accounts
+ * they follow. The ability to like and comment, and write a status is made here.*/
 
 public class MainActivity extends AppCompatActivity {
+
+    //For authentication
     private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
+    private FirebaseUser currentUser; //todo: ??
+    private String UID;
+
+    /*Storage and database references.*/
     private FirebaseDatabase database;
     private DatabaseReference followingRef;
-    private List<String> followingList = new ArrayList<>();
+    private StorageReference mStorageRef;
     private DatabaseReference posts;
     private DatabaseReference Users;
-    private Button postButton,addImageButton;
-    private EditText postContainer;
-    private String UID;
-    private StorageReference mStorageRef;
 
-    private MainAdaptor mainAdaptor;
-    private RecyclerView listPostsView;
+    /*Lists*/
+    private List<String> followingList = new ArrayList<>();
     private List<Posts> listPosts;
 
+    /*Views and buttons*/
+    private Button postButton, addImageButton;
+    private EditText postContainer;
+
+    //adaptor and recycler view
+    private MainAdaptor mainAdaptor;
+    private RecyclerView listPostsView;
+
+    //for image uploading
     private static final int PICK_IMAGE_REQUEST = 1;
     private String upload;
     private String postID;
@@ -67,20 +79,27 @@ public class MainActivity extends AppCompatActivity {
     private boolean hasUploaded = false;
     private ProgressBar mProgressSpinner;
 
-
+    /*Main*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Highlight the home buttons to indicated current page;
         highlightMenuIcon();
+
+        //progress spinner for uploading image
         mProgressSpinner = findViewById(R.id.mainAProgressBar);
         mStorageRef = FirebaseStorage.getInstance().getReference("postImages");
-        mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
 
+        // for authentication
+        mAuth = FirebaseAuth.getInstance();
+
+        //database references
+        database = FirebaseDatabase.getInstance();
         followingRef = database.getReference("following");
         posts = database.getReference("posts");
+
+        //todo: ???
         ProgressBar recyclerViewProgress;
 
         //grab the following list, and set the adapter
@@ -90,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         followingRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot users: dataSnapshot.getChildren()) {
+                for (DataSnapshot users : dataSnapshot.getChildren()) {
                     //gets the children in this tree
                     //adds the IDs to this usersID local variable
                     String thisUserID = users.getKey();
@@ -109,16 +128,22 @@ public class MainActivity extends AppCompatActivity {
                     listPostsView.setNestedScrollingEnabled(false);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
-        if (mAuth.getCurrentUser() != null) {getUserDetails();}
+        //if the user is logged in, get their details Todo: this can be moved to start and resume
+        if (mAuth.getCurrentUser() != null) {
+            getUserDetails();
+        }
 
+        //get the key of the posts
         postID = posts.push().getKey();
 
+        //onclick for uploading an image along side a post
         addImageButton = findViewById(R.id.postAddImageButton);
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,41 +151,51 @@ public class MainActivity extends AppCompatActivity {
                 openFileChooser();
             }
         });
-        postButton = findViewById(R.id.postButton);
+
+        //container where the user will write their posts.
         postContainer = findViewById(R.id.postEditText);
+
+        //post button
+        postButton = findViewById(R.id.postButton);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postUpdate();
+                postUpdate(); // post an update to the database.
             }
         });
 
+        //feedback button to provide us with feedback
         Button feedbackButton = findViewById(R.id.feedbackButton);
         feedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
-                overridePendingTransition(0,0);
+                overridePendingTransition(0, 0);
             }
         });
     }
-    public void getUserDetails() {
-        Users = database.getReference("users");
 
+    /*Get the users details such as their username and image and display it on screen*/
+    public void getUserDetails() {
+        //get user reference
+        Users = database.getReference("users");
+        //value event listener to user
         Users.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                //Image view for the users profile picture
                 ImageView userImage = findViewById(R.id.profileImage);
-                //Get the current users Unique ID. Used to find them in the database.
 
+                //Get the current users Unique ID. Used to find them in the database.
                 UID = mAuth.getCurrentUser().getUid();
+
                 //Set their details in the User details container.
                 user user = dataSnapshot.child(UID).getValue(user.class);
                 Picasso.get()
                         .load(user.getProfilePicture())
                         .placeholder(R.drawable.ic_account_circle_black_24dp)
                         .transform(new CropCircleTransformation())
-                        .into(userImage);
+                        .into(userImage); // put image into image view
             }
 
             @Override
@@ -169,53 +204,71 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*Post and update to feed, for all users whom follow said user to view.*/
     public void postUpdate() {
-        if(!postContainer.getText().toString().equals("")) {
+        //If the input is not empty, get a time stamp and upload to the database
+        if (!postContainer.getText().toString().equals("")) {
             String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             Posts post;
-            if(!hasUploaded) {
-                post = new Posts(mAuth.getUid(), postContainer.getText().toString(), null, null,0, currentDateTimeString);
+            //if it has not been uploaded then:
+            /*Spaghetti below is to do with the choices between uploading an image with text / without text
+             * or not uploading an image at all. TODO: change this */
+            if (!hasUploaded) {
+                post = new Posts(mAuth.getUid(), postContainer.getText().toString(), null, null, 0, currentDateTimeString);
             } else {
-                if(upload.equals("")) {
-                    post = new Posts(mAuth.getUid(), postContainer.getText().toString(), null, null,0, currentDateTimeString);
+                if (upload.equals("")) {
+                    post = new Posts(mAuth.getUid(), postContainer.getText().toString(), null, null, 0, currentDateTimeString);
                 } else {
-                    post = new Posts(mAuth.getUid(), postContainer.getText().toString(), upload, null,0, currentDateTimeString);
+                    post = new Posts(mAuth.getUid(), postContainer.getText().toString(), upload, null, 0, currentDateTimeString);
                 }
             }
             posts.child(postID).setValue(post);
             postContainer.setText("");
-        }
-        else {
+        } else {
             Toast.makeText(this, "You cannot post an empty update.", Toast.LENGTH_SHORT).show();
         }
         addImageButton.setText("Image");
         addImageButton.setTextSize(14);
         upload = "";
         hasUploaded = true;
-        postID = posts.push().getKey();
+        postID = posts.push().getKey(); //upload
     }
+
+    /*Open creator activity*/
     public void openCreatorActivity(View view) {
         startActivity(new Intent(MainActivity.this, CreatorActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
+    /*Open social activity*/
     public void openSocialActivity(View view) {
         startActivity(new Intent(MainActivity.this, SocialActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
+    /*Open recipes activity*/
     public void openRecipesActivity(View view) {
         startActivity(new Intent(MainActivity.this, RecipesActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
+    /*Open home activity*/
     public void openHomeActivity(View view) {
     }
+
+    /*Open favourites activity*/
     public void openFavouritesActivity(View view) {
         startActivity(new Intent(MainActivity.this, FavouritesActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
+
+    /*Highlight this icon on the bottom of the screen to indicate to the
+     * user which activity they are currently on*/
     public void highlightMenuIcon() {
         ImageView socialButton = findViewById(R.id.socialButton);
         socialButton.setImageResource(R.drawable.friends);
@@ -232,9 +285,13 @@ public class MainActivity extends AppCompatActivity {
         ImageView myRecipesButton = findViewById(R.id.myRecipesButton);
         myRecipesButton.setImageResource(R.drawable.book);
     }
+
+    /*When the user clicks on their own profile picture, open their profile*/
     public void openProfileActivity(View view) {
         startActivity(new Intent(MainActivity.this, ProfileActivity.class));
     }
+
+    /*For uploading an image, open the file chooser.*/
     private void openFileChooser() {
         //Open file explorer for user to upload an image of themselves
         Intent intent = new Intent();
@@ -243,40 +300,43 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
+    /*On resume, check if the user is still logged in.*/
     @Override
     protected void onResume() {
         super.onResume();
-        if(mAuth.getCurrentUser() == null) {
+        if (mAuth.getCurrentUser() == null) {
             startActivity(new Intent(MainActivity.this, LoginPreActivity.class));
-            overridePendingTransition(0,0);
+            overridePendingTransition(0, 0);
             finish();
         }
     }
 
+    /*On start, check if the user is logged in.*/
     @Override
     protected void onStart() {
         super.onStart();
-        if(mAuth.getCurrentUser() == null) {
+        if (mAuth.getCurrentUser() == null) {
             startActivity(new Intent(MainActivity.this, LoginPreActivity.class));
-            overridePendingTransition(0,0);
+            overridePendingTransition(0, 0);
             finish();
         }
     }
 
+    /*for uploading an image*/
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null){
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
             //Check if everything is okay, and then set the local path of the image as the URI
             mImageUri = data.getData();
             //show progress spinner
             mProgressSpinner.setVisibility(View.VISIBLE);
             //Get the Size of the image
-            Cursor returnCursor = getContentResolver().query(mImageUri,null,null,null,null);
+            Cursor returnCursor = getContentResolver().query(mImageUri, null, null, null, null);
             int imageSize = returnCursor.getColumnIndex(OpenableColumns.SIZE);
             returnCursor.moveToFirst();
 
-            if(returnCursor.getLong(imageSize) > 5000000) //Profile Picture size limit
+            if (returnCursor.getLong(imageSize) > 5000000) //Profile Picture size limit
             {
                 //Fail, upload aborted
                 Toast.makeText(this, "5MB Maximum upload", Toast.LENGTH_LONG).show();
@@ -287,14 +347,19 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-    private String getFileExtension(Uri uri){
+
+    /*get the file extension for uploading an image
+     * such as jpg, png*/
+    private String getFileExtension(Uri uri) {
         //get the file extension used.
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
+
+    /*upload image to database.*/
     private void uploadFile() {
-        if(mImageUri != null) {
+        if (mImageUri != null) {
             final StorageReference fileReference = mStorageRef.child(postID + "." + getFileExtension(mImageUri));
             addImageButton.setText(fileReference.toString());
             addImageButton.setTextSize(8);
@@ -313,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Upload Successful", Toast.LENGTH_LONG).show();
                             //convert uri to string
                             Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-                            while(!uri.isComplete());
+                            while (!uri.isComplete()) ;
                             Uri url = uri.getResult();
                             upload = url.toString();
                         }
@@ -328,7 +393,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(this,"No file Selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No file Selected", Toast.LENGTH_SHORT).show();
         }
     }
 }

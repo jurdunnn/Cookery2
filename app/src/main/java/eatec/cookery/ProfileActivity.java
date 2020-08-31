@@ -37,52 +37,64 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
+/*This activity is the activity responsible for showing a profile, where-be-it THIS
+ * users profile or another users profile. The profile will be populated the same way
+ * with a difference being the options provided to the user. If the profile being views is
+ * THIS users profile, the provide them with ability to edit it.. Whereas, if it is another users
+ * profile, give the ability to report, or follow. todo:block? others.*/
 public class ProfileActivity extends AppCompatActivity {
 
-    //constants
+    //for uploading an image
     private static final int PICK_IMAGE_REQUEST = 1;
+    private Uri mImageUri;
+    private ProgressBar mProgressSpinner;
 
-    //Firebase
+    //authentication and references.
     private FirebaseAuth mAuth;
+    private String UID;
     private DatabaseReference database;
-
     private StorageReference mStorageRef;
 
-    //variables
-    private String UID;
-    private Uri mImageUri;
+    //progress bar to show the users cookery level.
     private ProgressBar mProgressBar;
-    private ProgressBar mProgressSpinner;
-    //Objects
+
+    //Image (users profile picture) - can be clicked on to change the profile picture.
     private ImageButton ppImage;
+
+    //Biography (about you) - can be selected if it is THIS users, to edit.
     private EditText bioText;
+
+    /*main*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        //init other Variables
+
+        //to show level progress.
         mProgressBar = findViewById(R.id.rankProgressBar);
-        //Init Firebase
-        mProgressSpinner = findViewById(R.id.uploadProgressBar);
-        mProgressSpinner.setVisibility(View.GONE);
 
+        //authentication
         mAuth = FirebaseAuth.getInstance();
-        UID = mAuth.getCurrentUser().getUid();
+        UID = mAuth.getCurrentUser().getUid(); // get THIS users ID
 
+        // get references
         database = FirebaseDatabase.getInstance().getReference("users");
         mStorageRef = FirebaseStorage.getInstance().getReference("pp");
 
-
+        //for uploading a profile picture
+        mProgressSpinner = findViewById(R.id.uploadProgressBar);
+        mProgressSpinner.setVisibility(View.GONE);
         //Profile Picture
         ppImage = findViewById(R.id.ppImageButton);
         ppImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFileChooser();
+                openFileChooser(); // choose image
             }
         });
 
         //Allows the user to edit their biography
+        //todo: this is not in form with the rest of the app
         bioText = findViewById(R.id.bioText);
         bioText.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -98,7 +110,9 @@ public class ProfileActivity extends AppCompatActivity {
                             .setValue(setText);
                     bioText.setTextColor(Color.BLACK);
                     return true;
-                } else {return false;}
+                } else {
+                    return false;
+                }
 
             }
         });
@@ -106,6 +120,8 @@ public class ProfileActivity extends AppCompatActivity {
         //get the users details
         getUserDetails();
     }
+
+    /*for uploading an image*/
     private void openFileChooser() {
         //Open file explorer for user to upload an image of themselves
         Intent intent = new Intent();
@@ -113,21 +129,23 @@ public class ProfileActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
+
+    /*for uploading an image*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-        && data != null && data.getData() != null){
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
             //Check if everything is okay, and then set the local path of the image as the URI
             mImageUri = data.getData();
             //show progress spinner
             mProgressSpinner.setVisibility(View.VISIBLE);
             //Get the Size of the image
-            Cursor returnCursor = getContentResolver().query(mImageUri,null,null,null,null);
+            Cursor returnCursor = getContentResolver().query(mImageUri, null, null, null, null);
             int imageSize = returnCursor.getColumnIndex(OpenableColumns.SIZE);
             returnCursor.moveToFirst();
 
-            if(returnCursor.getLong(imageSize) > 3000000) //Profile Picture size limit
+            if (returnCursor.getLong(imageSize) > 3000000) //Profile Picture size limit
             {
                 //Fail, upload aborted
                 Toast.makeText(this, "3MB Max", Toast.LENGTH_LONG).show();
@@ -138,14 +156,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
     }
-    private String getFileExtension(Uri uri){
+
+    /*get the file extension of image, eg. png, jpg*/
+    private String getFileExtension(Uri uri) {
         //get the file extension used.
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
+
+    /*upload the file*/
     private void uploadFile() {
-        if(mImageUri != null) {
+        if (mImageUri != null) {
             final StorageReference fileReference = mStorageRef.child(UID + "." + getFileExtension(mImageUri));
             fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -163,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                             //convert uri to string
                             Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-                            while(!uri.isComplete());
+                            while (!uri.isComplete()) ;
                             Uri url = uri.getResult();
                             String upload = url.toString();
 
@@ -181,10 +203,12 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(this,"No file Selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No file Selected", Toast.LENGTH_SHORT).show();
 
         }
     }
+
+    /*Get the users details and populate the views with this data.*/
     public void getUserDetails() {
         //Get the user tree data
         Query query = database.orderByChild("userID").equalTo(mAuth.getCurrentUser().getUid());
@@ -217,11 +241,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*Sign THIS user out.*/
     public void signOut(View view) {
         Toast.makeText(this, "You are now signed out", Toast.LENGTH_SHORT).show();
         mAuth.signOut();
         startActivity(new Intent(ProfileActivity.this, LoginPreActivity.class));
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         finish();
     }
 }

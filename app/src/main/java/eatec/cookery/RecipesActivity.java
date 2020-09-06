@@ -36,6 +36,7 @@ public class RecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
         String userRecipeSearch = getIntent().getStringExtra("userRecipeSearch");
 
+        /*Set the colour of the filter check box text to dark grey*/
         vegText = findViewById(R.id.vegText);
         vegText.setTextColor(Color.DKGRAY);
         noneText = findViewById(R.id.noneText);
@@ -45,12 +46,14 @@ public class RecipesActivity extends AppCompatActivity {
         veganText = findViewById(R.id.veganText);
         veganText.setTextColor(Color.DKGRAY);
 
+        /*Get list of recipes*/
         listRecipesList = new ArrayList<>();
         viewRecipeList = findViewById(R.id.recipeRView);
         tagList = new ArrayList<>();
         searchBar = findViewById(R.id.SearchBar);
         Button searchButton = findViewById(R.id.searchBarButton);
 
+        /*Use the search parameters to search for recipes*/
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +66,7 @@ public class RecipesActivity extends AppCompatActivity {
             Search();
         }
 
+        /*For feedback to developers, as this is a main activity.*/
         Button feedbackButton = findViewById(R.id.feedbackButton);
         feedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +80,9 @@ public class RecipesActivity extends AppCompatActivity {
         highlightMenuIcon();
     }
 
+    /*Set the correct interface for the vegan checkbox*/
     public void setVeganCard(View v) {
+        //add or remove it from list
         if (tagList.contains("vegan")) {
             veganText.setTextColor(Color.DKGRAY);
             tagList.remove("vegan");
@@ -89,7 +95,9 @@ public class RecipesActivity extends AppCompatActivity {
         listEmpty();
     }
 
+    /*Set the correct interface for the vegetarian checkbox*/
     public void setVegetarianCard(View v) {
+        //add or remove it from list
         if (tagList.contains("veg")) {
             vegText.setTextColor(Color.DKGRAY);
             tagList.remove("veg");
@@ -102,6 +110,8 @@ public class RecipesActivity extends AppCompatActivity {
         listEmpty();
     }
 
+    /*Set the correct interface for the none checkbox
+     * reset the colors of the other checkboxes to their default...*/
     public void setNoneCard(View v) {
         tagList.clear();
 
@@ -114,7 +124,9 @@ public class RecipesActivity extends AppCompatActivity {
 
     }
 
+    /*Set the correct interface for the fish checkbox*/
     public void setFishCard(View v) {
+        /*add or remove it from list*/
         if (tagList.contains("fish")) {
             fishText.setTextColor(Color.DKGRAY);
             tagList.remove("fish");
@@ -127,6 +139,7 @@ public class RecipesActivity extends AppCompatActivity {
         listEmpty();
     }
 
+    /*check if the list is empty*/
     public void listEmpty() {
         //Checks that if the list is empty then it will set the filter to none UI;
         if (tagList.isEmpty()) {
@@ -134,12 +147,19 @@ public class RecipesActivity extends AppCompatActivity {
         }
     }
 
+    /*Search the database using the users parameters*/
     public void Search() {
+
+        //build the set tags into a string builder
+        //TODO: check if this is working correctly
         final StringBuilder strTaglistBuilder = new StringBuilder();
         if (tagList.isEmpty()) {
             strTaglistBuilder.append("none");
         }
 
+        /*For the size of the tagList, add each element that is
+         * apparent at the end of the string builder object, also add a comma and
+         * a space, if the element is not the first element in the tagList*/
         for (int i = 0; tagList.size() > i; i++) {
             if (i == 0) {
                 strTaglistBuilder.append(tagList.get(i));
@@ -147,11 +167,17 @@ public class RecipesActivity extends AppCompatActivity {
                 strTaglistBuilder.append(", " + tagList.get(i));
             }
         }
+
+        //Get the database reference
         DatabaseReference recipeRef = FirebaseDatabase.getInstance().getReference().child("recipes");
 
+        //Query TODO ??? theres no diffrenece between the reference and query
         Query recipeQuery = recipeRef;
+
+        //convert string builder into list
         String strTagList = String.valueOf(strTaglistBuilder);
 
+        //set adapter.
         listRecipesList = new ArrayList<>();
         viewRecipeList = findViewById(R.id.recipeRView);
         recipeAdaptor = new RecipeAdaptor(listRecipesList, recipeQuery, strTagList, searchBar);
@@ -160,6 +186,8 @@ public class RecipesActivity extends AppCompatActivity {
         viewRecipeList.setAdapter(recipeAdaptor);
     }
 
+    /*Highlight the correct menu icon to show to the user what activity
+     * they are on*/
     public void highlightMenuIcon() {
         ImageView socialButton = findViewById(R.id.socialButton);
         socialButton.setImageResource(R.drawable.friends);
@@ -177,27 +205,32 @@ public class RecipesActivity extends AppCompatActivity {
         myRecipesButton.setImageResource(R.drawable.book);
     }
 
+    /*Open the creator activity*/
     public void openCreatorActivity(View view) {
         startActivity(new Intent(RecipesActivity.this, CreatorActivity.class));
         overridePendingTransition(0, 0);
         finish();
     }
 
+    /*Open the social activity*/
     public void openSocialActivity(View view) {
         startActivity(new Intent(RecipesActivity.this, SocialActivity.class));
         overridePendingTransition(0, 0);
         finish();
     }
 
+    /*open the recipes activity*/
     public void openRecipesActivity(View view) {
     }
 
+    /*open the home activity*/
     public void openHomeActivity(View view) {
         startActivity(new Intent(RecipesActivity.this, MainActivity.class));
         overridePendingTransition(0, 0);
         finish();
     }
 
+    /*Open the favourites activity.*/
     public void openFavouritesActivity(View view) {
         startActivity(new Intent(RecipesActivity.this, FavouritesActivity.class));
         overridePendingTransition(0, 0);

@@ -2,8 +2,6 @@ package eatec.cookery;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,46 +20,121 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
+/*This adapter is responsible for how the data is shown to the user within the social activity.*/
 public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.ViewHolder> {
 
-
+    /*lists*/
     private List<user> mUsers;
-    private String mSearchBar;
     private ArrayList<String> mKeys = new ArrayList<>();
+    private List<String> following = new ArrayList<>();
+
+    /*Database references*/
     private DatabaseReference userRef;
     private DatabaseReference followingRef;
-    private List<String> following = new ArrayList<>();
+
+    /*search bar input*/
+    private String mSearchBar;
+
+    /*context*/
     private Context mContext;
+
+    /*user authentication*/
     private FirebaseAuth mAuth;
 
-    public SocialAdapter(List<user> users, String searchBar){
+    /*constructor*/
+    public SocialAdapter(List<user> users, String searchBar) {
         mUsers = users;
         mSearchBar = searchBar;
+
+        /*user authentication*/
         mAuth = FirebaseAuth.getInstance();
+
+        /*get references*/
         followingRef = FirebaseDatabase.getInstance().getReference("following");
         userRef = FirebaseDatabase.getInstance().getReference("users");
+
+        /*event listener for the user list*/
         userRef.addChildEventListener(new SocialAdapter.SocialChildEventListener());
     }
 
+    /*view holder*/
+    @Override
+    public SocialAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+
+        View socialView = inflater.inflate(R.layout.fragment_user_row, parent, false);
+
+        SocialAdapter.ViewHolder viewHolder = new SocialAdapter.ViewHolder(socialView);
+        return viewHolder;
+    }
+
+    /*bind view holder*/
+    @Override
+    public void onBindViewHolder(final SocialAdapter.ViewHolder holder, final int position) {
+
+        final user user = mUsers.get(position); // get user at position
+
+        //Make the user clickable
+        final ConstraintLayout mOuterContainer = holder.outerContainer;
+        mOuterContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView userIDTV = view.findViewById(R.id.userIDTV); // get ID view
+                String userID = userIDTV.getText().toString(); // get the text from view
+
+                Intent mIntent = new Intent(mContext, ViewUserProfile.class);
+                mIntent.putExtra("userID", userID);
+                mContext.startActivity(mIntent); //open the view user profile activity using the ID
+            }
+        });
+
+        /*get views from holder*/
+        final TextView mUsername = holder.username;
+        final TextView mCookeryRank = holder.cookeryRank;
+        final TextView mUserIDTextView = holder.userIDTextView;
+        final ImageView mImageView = holder.userImage;
+
+        /*set the content from database*/
+        mUsername.setText(user.getUserName()); //username
+        mCookeryRank.setText(user.convertCookeryRank()); //their rank
+        mUserIDTextView.setText(user.getUserID()); //hidden ID
+        Picasso.get().load(user.getProfilePicture()) //their profile picture
+                .transform(new CropCircleTransformation())
+                .placeholder(R.drawable.ic_account_circle_black_24dp)
+                .into(mImageView);
+    }
+
+    /*get size of list*/
+    @Override
+    public int getItemCount() {
+        return mUsers.size();
+    }
+
+    /*even listener for each user*/
     class SocialChildEventListener implements ChildEventListener {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-            final user user = dataSnapshot.getValue(user.class);
+            final user user = dataSnapshot.getValue(user.class); // get user
 
-            if(mSearchBar.equals("")) {
-                //get list of users that are being followed
+            /*If the search bar is empty then only show users that THIS user is following*/
+            if (mSearchBar.equals("")) {
                 followingRef.child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot children : dataSnapshot.getChildren()) {
-                            if(children.getKey().equals(user.getUserID())) {
-                                mUsers.add(user);
-                                notifyDataSetChanged();
+                        for (DataSnapshot children : dataSnapshot.getChildren()) {
+                            if (children.getKey().equals(user.getUserID())) {
+                                mUsers.add(user); //get user
+
+                                notifyDataSetChanged(); //update
+
                                 String key = dataSnapshot.getKey();
-                                mKeys.add(key);
+                                mKeys.add(key); // add key to list
                             }
                         }
                     }
@@ -71,29 +144,30 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.ViewHolder
 
                     }
                 });
-            }
-            else {
-                if(user.getUserName().toLowerCase().contains(mSearchBar.toLowerCase())) {
-                    //Checks if the username is loosely connected to the users search entry, if it is then it will display the users
-                    mUsers.add(user);
-                    notifyDataSetChanged();
+            } else { //if username matches what THIS user has searched for then show them
+                if (user.getUserName().toLowerCase().contains(mSearchBar.toLowerCase())) {
+                    mUsers.add(user); // get user
+
+                    notifyDataSetChanged();//update
+
                     String key = dataSnapshot.getKey();
-                    mKeys.add(key);
+                    mKeys.add(key); // add key to list
                 }
             }
 
         }
 
+        /*If the user has been changed, update on screen.*/
         @Override
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             final user user = dataSnapshot.getValue(user.class);
-            if(mSearchBar.equals("")) {
+            if (mSearchBar.equals("")) {
                 //get list of users that are being followed
                 followingRef.child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot children : dataSnapshot.getChildren()) {
-                            if(children.getKey().equals(user.getUserID())) {
+                        for (DataSnapshot children : dataSnapshot.getChildren()) {
+                            if (children.getKey().equals(user.getUserID())) {
                                 String key = dataSnapshot.getKey();
 
                                 int index = mKeys.indexOf(key);
@@ -129,7 +203,7 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.ViewHolder
         }
     }
 
-
+    /*view holder - get views*/
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView username;
         private TextView cookeryRank;
@@ -147,55 +221,6 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.ViewHolder
             outerContainer = (ConstraintLayout) itemView.findViewById(R.id.OuterContainer);
 
         }
-    }
-
-    @Override
-    public SocialAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mContext = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-
-        View socialView = inflater.inflate(R.layout.fragment_user_row,parent,false);
-
-        SocialAdapter.ViewHolder viewHolder = new SocialAdapter.ViewHolder(socialView);
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(final SocialAdapter.ViewHolder holder, final int position) {
-        final user user = mUsers.get(position);
-
-
-
-        //Make the user clickable
-        final ConstraintLayout mOuterContainer = holder.outerContainer;
-        mOuterContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView userIDTV = view.findViewById(R.id.userIDTV);
-                String userID = userIDTV.getText().toString();
-
-                Intent mIntent = new Intent(mContext, ViewUserProfile.class);
-                mIntent.putExtra("userID", userID);
-                mContext.startActivity(mIntent);
-            }
-        });
-        final TextView mUsername = holder.username;
-        final TextView mCookeryRank = holder.cookeryRank;
-        final TextView mUserIDTextView = holder.userIDTextView;
-        final ImageView mImageView = holder.userImage;
-
-        mUsername.setText(user.getUserName());
-        mCookeryRank.setText(user.convertCookeryRank());
-        mUserIDTextView.setText(user.getUserID());
-        Picasso.get().load(user.getProfilePicture())
-                .transform(new CropCircleTransformation())
-                .placeholder(R.drawable.ic_account_circle_black_24dp)
-                .into(mImageView);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mUsers.size();
     }
 
 }

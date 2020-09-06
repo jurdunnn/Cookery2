@@ -7,4 +7,5 @@
     <color name="facebookButtonColor">#1a53ce</color>
     <color name="genericButtonColor">#17a7cf</color>
     <color name="AccentGenericButtonColor">#097897</color>
+    <color name="defaultGray">#DADADA</color>
 </resources>

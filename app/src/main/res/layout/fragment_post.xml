@@ -17,18 +17,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/postCardLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/postInformation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
@@ -39,14 +41,14 @@
 
                         <ImageView
                             android:id="@+id/PostImageUser"
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:layout_marginBottom="8dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginBottom="2dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
@@ -55,7 +57,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginTop="8dp"
                                 android:text="TextView"
                                 android:textColor="@color/genericButtonColor"
                                 android:textStyle="bold" />
@@ -65,16 +67,17 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
-                                android:layout_marginTop="8dp"
                                 android:text="TextView"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/genericButtonColor"
-                                android:textSize="10sp" />
+                                android:textSize="8sp" />
+
                         </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <ImageView
@@ -88,6 +91,7 @@
                 app:srcCompat="@drawable/cookery_icon512x512" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/PostText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp">
@@ -96,8 +100,8 @@
                     android:id="@+id/constraintLayout7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -107,7 +111,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="8dp"
                         android:text="TextView"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -142,44 +146,49 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/PostActions"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="16dp"
                 android:orientation="horizontal"
-                android:paddingLeft="32dp"
-                tools:layout_marginTop="16dp">
+                tools:layout_marginTop="8dp">
 
-                <Button
+                <ImageView
                     android:id="@+id/likePostButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_thumb_up_black_24dp"
-                    android:text="0"
-                    android:textAlignment="center"
-                    android:textColor="@color/genericButtonColor" />
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
-                <Button
+                <ImageView
                     android:id="@+id/commentPostButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_comment_black_24dp"
-                    android:text="Comment"
-                    android:textColor="@color/genericButtonColor" />
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_baseline_comment_24" />
 
-                <Button
+                <ImageView
                     android:id="@+id/sharePostButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_share_24dp"
-                    android:text="Share"
-                    android:textColor="@color/genericButtonColor" />
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_baseline_send_24" />
+
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/numberOfLikes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="TextView" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

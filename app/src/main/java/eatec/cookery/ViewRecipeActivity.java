@@ -1,8 +1,6 @@
 package eatec.cookery;
 
 import android.os.Bundle;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,6 +11,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+/*This activity is responsible for showing the steps within a recipes*/
 public class ViewRecipeActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private cardAdapter cardAdapter;
@@ -20,6 +22,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
 
     private String recipeID;
     private DatabaseReference Database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
         stepsList = new ArrayList<>();
 
     }
+
     @Override
     protected void onStart() {
         //receives all the steps and adds them to the list
@@ -40,19 +44,20 @@ public class ViewRecipeActivity extends AppCompatActivity {
                 stepsList.clear();
 
                 //Iterate through the nodes
-                for(DataSnapshot stepSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot stepSnapshot : dataSnapshot.getChildren()) {
                     //get step
                     step step = stepSnapshot.getValue(step.class);
                     //add step to list, if it is apart of the same recipe.
-                    if(step.getRecipeID().equals(recipeID)) {
+                    if (step.getRecipeID().equals(recipeID)) {
                         stepsList.add(step);
                     }
                 }
+
                 //create Adapter
                 cardAdapter = new cardAdapter(stepsList, ViewRecipeActivity.this);
                 viewPager = findViewById(R.id.cardViewPager);
                 viewPager.setAdapter(cardAdapter);
-                viewPager.setPadding(130,0,130,0);
+                viewPager.setPadding(130, 0, 130, 0);
             }
 
             @Override

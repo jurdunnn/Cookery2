@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:gravity="center_horizontal"
-    tools:context="eatec.cookery.LoginActivity"
+    tools:context="eatec.cookery.login.LoginActivity"
     tools:layout_editor_absoluteY="25dp">
 
     <!-- Login progress -->
@@ -66,6 +66,7 @@
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1"
+            android:password="true"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

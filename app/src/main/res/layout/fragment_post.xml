@@ -9,8 +9,8 @@
         android:id="@+id/postCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,6 +60,7 @@
                                 android:layout_marginTop="8dp"
                                 android:text="TextView"
                                 android:textColor="@color/genericButtonColor"
+                                android:textSize="@dimen/default_heading"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -70,7 +71,7 @@
                                 android:text="TextView"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/genericButtonColor"
-                                android:textSize="8sp" />
+                                android:textSize="@dimen/default_text" />
 
                         </LinearLayout>
 
@@ -112,8 +113,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
                         android:text="TextView"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/default_heading"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +189,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="@dimen/default_text" />
 
         </LinearLayout>
 

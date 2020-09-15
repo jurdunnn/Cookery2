@@ -5,7 +5,7 @@
     android:id="@+id/stepsContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eatec.cookery.StepActivity">
+    tools:context="eatec.cookery.recipes.step.StepActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"

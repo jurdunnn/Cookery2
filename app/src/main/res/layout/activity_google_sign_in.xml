@@ -5,7 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eatec.cookery.GoogleSignInActivity">
+    tools:context="eatec.cookery.login.GoogleSignInActivity">
 
     <Button
         android:id="@+id/signInButton"

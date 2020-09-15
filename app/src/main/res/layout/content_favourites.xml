@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="eatec.cookery.FavouritesActivity"
+    tools:context="eatec.cookery.favourites.FavouritesActivity"
     tools:showIn="@layout/activity_favourites">
 
     <androidx.recyclerview.widget.RecyclerView

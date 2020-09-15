@@ -40,9 +40,10 @@
                         android:layout_weight="1"
                         android:backgroundTint="@color/genericButtonColor"
                         android:drawableLeft="@drawable/ic_person_add_24dp"
-                        android:ems="10"
+                        android:ems="8"
                         android:hint="   username..."
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:textSize="@dimen/default_heading" />
 
                     <Button
                         android:id="@+id/socialSearchButton"
@@ -51,7 +52,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Search"
-                        android:textColor="@color/genericButtonColor" />
+                        android:textColor="@color/genericButtonColor"
+                        android:textSize="@dimen/default_heading" />
 
                 </LinearLayout>
 

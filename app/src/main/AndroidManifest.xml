@@ -10,71 +10,71 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".FeedbackActivity"
+            android:name=".other.FeedbackActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CommentPost"
+            android:name=".main.CommentPost"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ViewUserProfile"
+            android:name=".social.ViewUserProfile"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".CardActivity"
+            android:name=".recipes.card.CardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ViewRecipeActivity"
+            android:name=".recipes.ViewRecipeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".CreatorActivity"
+            android:name=".creator.CreatorActivity"
             android:label="@string/title_activity_creator"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".RecipesActivity"
+            android:name=".recipes.RecipesActivity"
             android:label="@string/title_activity_recipes"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".FavouritesActivity"
+            android:name=".favourites.FavouritesActivity"
             android:label="@string/title_activity_favourites"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:label="LoginActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".GoogleSignInActivity"
+            android:name=".login.GoogleSignInActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".createAccountActivity"
+            android:name=".login.createAccountActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".social.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".CreatorNewRecipe"
+            android:name=".creator.CreatorNewRecipe"
             android:label="@string/title_activity_creator_new_recipe"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".SocialActivity"
+            android:name=".social.SocialActivity"
             android:label="@string/title_activity_social"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".LoginPreActivity"
+            android:name=".login.LoginPreActivity"
             android:label="Cookery">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -83,7 +83,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StepActivity"
+            android:name=".recipes.step.StepActivity"
             android:label="@string/title_activity_step"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- Ads -->
         <meta-data

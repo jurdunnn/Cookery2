@@ -35,6 +35,7 @@
             android:layout_marginTop="8dp"
             android:text="TextView"
             android:textAlignment="textStart"
+            android:textSize="@dimen/default_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/fCommentPP"
             app:layout_constraintTop_toBottomOf="@+id/fCommentUserID" />
@@ -48,6 +49,7 @@
             android:layout_marginTop="8dp"
             android:text="TextView"
             android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/default_heading"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/fCommentPP"

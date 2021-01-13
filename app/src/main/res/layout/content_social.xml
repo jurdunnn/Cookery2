@@ -30,8 +30,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp">
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp">
 
                     <EditText
                         android:id="@+id/socialSearchBar"
@@ -39,9 +40,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTint="@color/genericButtonColor"
-                        android:drawableLeft="@drawable/ic_person_add_24dp"
+                        android:drawableStart="@drawable/ic_person_add_24dp"
                         android:ems="8"
-                        android:hint="   username..."
+                        android:hint="@string/prompt_username"
+                        android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textSize="@dimen/default_heading" />
 
@@ -51,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Search"
+                        android:text="@string/search"
                         android:textColor="@color/genericButtonColor"
                         android:textSize="@dimen/default_heading" />
 

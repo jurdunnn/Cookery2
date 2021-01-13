@@ -43,9 +43,10 @@
                             android:id="@+id/PostImageUser"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:layout_marginBottom="2dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp" />
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:contentDescription="@string/profile_picture_image" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -56,9 +57,9 @@
                                 android:id="@+id/PostUsernameUser"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="8dp"
+                                android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
-                                android:text="TextView"
+                                android:text="@string/prompt_username"
                                 android:textColor="@color/genericButtonColor"
                                 android:textSize="@dimen/default_heading"
                                 android:textStyle="bold" />
@@ -67,8 +68,8 @@
                                 android:id="@+id/PostDateTime"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="8dp"
-                                android:text="TextView"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/comment_post_post_time"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/genericButtonColor"
                                 android:textSize="@dimen/default_text" />
@@ -86,8 +87,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="365dp"
                 android:adjustViewBounds="true"
-                android:maxHeight="250dp"
+                android:contentDescription="@string/post_image"
                 android:maxWidth="400dp"
+                android:maxHeight="250dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/cookery_icon512x512" />
 
@@ -111,10 +113,10 @@
                         android:id="@+id/contentTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="TextView"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/content_description"
                         android:textSize="@dimen/default_heading"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -125,9 +127,8 @@
                         android:id="@+id/postIDTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
+                        android:text="@string/postid"
                         android:textColor="@android:color/white"
-                        android:textSize="8sp"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -136,9 +137,8 @@
                         android:id="@+id/userIDTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
+                        android:text="@string/userid"
                         android:textColor="@android:color/white"
-                        android:textSize="8sp"
                         android:visibility="gone"
                         app:layout_constraintEnd_toStartOf="@+id/postIDTV"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="2dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:orientation="horizontal"
                 tools:layout_marginTop="8dp">
 
@@ -161,6 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/like_button"
                     android:padding="5dp"
                     app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
@@ -168,8 +169,9 @@
                     android:id="@+id/commentPostButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/comment_button"
                     android:padding="5dp"
                     app:srcCompat="@drawable/ic_baseline_comment_24" />
 
@@ -177,8 +179,9 @@
                     android:id="@+id/sharePostButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/share_button"
                     android:padding="5dp"
                     app:srcCompat="@drawable/ic_baseline_send_24" />
 
@@ -188,8 +191,8 @@
                 android:id="@+id/numberOfLikes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:text="TextView"
+                android:layout_marginStart="24dp"
+                android:text="@string/number_of_likes"
                 android:textSize="@dimen/default_text" />
 
         </LinearLayout>

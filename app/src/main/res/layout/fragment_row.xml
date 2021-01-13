@@ -35,7 +35,7 @@
                 android:orientation="horizontal">
 
                 <FrameLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
@@ -44,8 +44,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
-                        android:maxHeight="250dp"
+                        android:contentDescription="@string/post_image"
                         android:maxWidth="400dp"
+                        android:maxHeight="250dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/cookery_logo_round" />
 
@@ -54,9 +55,10 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_gravity="right"
-                        android:layout_marginRight="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_weight="1"
+                        android:contentDescription="Recipe has been reported"
                         android:tooltipText="This recipe has been reported as inappropriate"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_report_problem_24dp" />
@@ -154,7 +156,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_report_24dp"
+                        android:drawableStart="@drawable/ic_report_24dp"
                         android:text="Report"
                         android:textColor="@color/googleButtonColor" />
 
@@ -166,7 +168,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_star_border_24dp"
+                        android:drawableStart="@drawable/ic_star_border_24dp"
                         android:text="Favourite"
                         android:textColor="@color/genericButtonColor" />
 
@@ -178,7 +180,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_star_24dp"
+                        android:drawableStart="@drawable/ic_star_24dp"
                         android:text="Unfavourite"
                         android:textColor="@color/genericButtonColor"
                         android:visibility="gone" />

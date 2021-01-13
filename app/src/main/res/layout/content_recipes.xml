@@ -66,7 +66,7 @@
                                 android:id="@+id/veganText"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Vegan"
+                                android:text="@string/str_vegan"
                                 android:textAlignment="center"
                                 android:textStyle="bold" />
                         </androidx.cardview.widget.CardView>
@@ -87,7 +87,7 @@
                                 android:id="@+id/noneText"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="No Filter"
+                                android:text="@string/no_filter"
                                 android:textAlignment="center"
                                 android:textAllCaps="false"
                                 android:textStyle="bold" />
@@ -109,7 +109,7 @@
                                 android:id="@+id/fishText"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Pescetarian"
+                                android:text="@string/str_pesc"
                                 android:textAlignment="center"
                                 android:textStyle="bold" />
                         </androidx.cardview.widget.CardView>
@@ -131,7 +131,7 @@
                                 android:id="@+id/vegText"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="Vegetarian"
+                                android:text="@string/str_veg"
                                 android:textAlignment="center"
                                 android:textStyle="bold" />
                         </androidx.cardview.widget.CardView>
@@ -155,11 +155,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:drawable/screen_background_light_transparent"
-                            android:drawableLeft="@android:drawable/ic_menu_search"
+                            android:drawableStart="@android:drawable/ic_menu_search"
                             android:ems="10"
                             android:hint="@android:string/search_go"
                             android:inputType="textPersonName"
-                            android:padding="5dp" />
+                            android:padding="5dp"
+                            android:importantForAutofill="no" />
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"

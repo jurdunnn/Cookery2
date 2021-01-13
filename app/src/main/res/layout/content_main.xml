@@ -49,9 +49,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:drawableStart="@drawable/ic_image_24dp"
-                    android:text="Image"
-                    android:textColor="@color/genericButtonColor"
-                    android:textSize="10sp"
+                    android:text="@string/image"
+                    android:textColor="@color/AccentGenericButtonColor"
                     app:layout_constraintEnd_toStartOf="@+id/postButton"
                     app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
@@ -60,9 +59,8 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Post"
-                    android:textColor="@color/genericButtonColor"
-                    android:textSize="10sp"
+                    android:text="@string/post"
+                    android:textColor="@color/AccentGenericButtonColor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView2"
@@ -70,8 +68,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/profileImage"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:clickable="true"
@@ -79,7 +77,8 @@
                     android:scaleType="fitXY"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/user" />
+                    app:srcCompat="@drawable/user"
+                    android:focusable="true" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView2"
@@ -103,18 +102,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/white"
-                        android:ems="10"
                         android:gravity="start|top"
-                        android:hint="  Post an update..."
+                        android:hint="@string/post_an_update_hint"
                         android:inputType="textMultiLine"
-                        android:textColorHint="@color/genericButtonColor"
-                        android:textSize="10sp" />
+                        android:padding="2dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColorHint="@color/defaultGray"
+                        android:importantForAutofill="no" />
 
                     <ProgressBar
                         android:id="@+id/mainAProgressBar"
                         style="?android:attr/progressBarStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="26dp"
+                        android:layout_height="15dp"
                         android:layout_gravity="center_horizontal"
                         android:visibility="gone" />
                 </androidx.cardview.widget.CardView>

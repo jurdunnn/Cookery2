@@ -1,4 +1,7 @@
 <resources>
+
+    <string name="TODO">TODO</string>
+
     <string name="app_name">Cookery</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_creator">CreatorActivity</string>
@@ -7,22 +10,39 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="prompt_email">Email Address</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_username">Username</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="action_register">Register</string>
+
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="create_account">Create Account</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+
+
+    <!-- Login error messages and prompts -->
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="openRecipesActivity" />
+        completions."</string>
 
+    <string name="register_news">Update me with news</string>
+    <string name="register_confirmation_tandc">I have read the terms of service and agree</string>
+
+    <!--Relating button text - universal -->
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_text">Continue</string>
+
+    <!--Ad mob -->
     <string name="admob_app_id">ca-app-pub-2132116925167984~3381638125</string>
     <string name="ad_unit_id">ca-app-pub-2132116925167984/4311576413</string>
 
+    <!--Title selections - auto generated -->
+    <string name="openRecipesActivity" />
     <string name="title_activity_create_account">createAccountActivity</string>
     <string name="title_activity_social">SocialActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -32,4 +52,69 @@
     <string name="title_activity_step_builder">StepBuilder</string>
     <string name="title_activity_create_steps">CreateSteps</string>
     <string name="title_activity_step">StepActivity</string>
+
+    <!-- Strings relating to activity_card -->
+    <string name="activity_card_title">Step Indication</string>
+    <string name="activity_card_body">Step body</string>
+
+    <!-- Strings relating to activity_comment_post -->
+    <string name="comment_post_post_time">dd/mm/yy 00:00</string>
+    <string name="comment_post_comment_button">Comment</string>
+    <string name="comment_post_comment_hint">Comment…</string>
+
+    <!--Strings relating the details for inputting data for recipes -->
+    <string name="recipe_name_req">Recipe Name*</string>
+    <string name="recipe_description_req">Recipe Description*</string>
+
+    <!--Strings relating the dietary types of recipes -->
+    <string name="str_vegan">Vegan</string>
+    <string name="str_veg">Vegetarian</string>
+    <string name="str_pesc">Pescatarian</string>
+
+    <!-- create recipe -->
+    <string name="normal">Normal</string>
+    <string name="hard">Hard</string>
+    <string name="simple">Simple</string>
+    <string name="how_simple_is_your_recipe">How simple is your recipe?</string>
+    <string name="private_recipe">Private Recipe</string>
+    <string name="is_your_recipe_for_any_specific_dietary_practice">Is your recipe for any specific dietary practice?</string>
+
+    <!--login pre -->
+    <string name="login_pre_signInText">Login in now to enjoy cooking with your friends</string>
+    <string name="continue_with_google_button">CONTINUE WITH GOOGLE</string>
+    <string name="continue_with_facebook_button">CONTINUE WITH FACEBOOK</string>
+    <string name="cookery_logo_contentDescription">Cookery Logo</string>
+
+    <!--steps -->
+    <string name="add_step">Add Step</string>
+    <string name="add_timer">Add Timer</string>
+
+    <!--user profile-->
+    <string name="cookery_rank">Cookery Rank</string>
+    <string name="warn_no_bio_profile">This user has not added a biography yet!</string>
+    <string name="unfollow_user">Unfollow User</string>
+    <string name="follow_user">Follow User</string>
+    <string name="report_user">Report User</string>
+    <string name="view_recipes">View Recipes</string>
+    <string name="profile_picture_image">Profile Picture Image</string>
+
+    <string name="create_recipe">Create Recipe</string>
+    <string name="image">Image</string>
+    <string name="post">Post</string>
+    <string name="post_an_update_hint">Post an update...</string>
+    <string name="upload_a_profile_piture">Upload a profile piture!</string>
+    <string name="enter_bio">Enter your biography here for other users to learn more about you!</string>
+    <string name="log_out">Log out</string>
+    <string name="no_filter">No Filter</string>
+    <string name="search">Search</string>
+    <string name="content_description">content description</string>
+    <string name="share_button">share button</string>
+    <string name="like_button">like button</string>
+    <string name="comment_button">comment button</string>
+    <string name="number_of_likes">Number of likes</string>
+    <string name="userid">userID</string>
+    <string name="postid">postID</string>
+    <string name="post_image">post image</string>
+
+
 </resources>

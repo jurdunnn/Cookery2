@@ -15,13 +15,13 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="364dp"
-        android:background="@android:color/white"
+        android:contentDescription="@string/TODO"
         android:fadingEdgeLength="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        app:srcCompat="@drawable/ic_baseline_image_24" />
 
     <ProgressBar
         android:id="@+id/progressSpinner"
@@ -50,10 +50,10 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
-            android:text="@android:string/cancel"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/cancel"
             android:textColor="@color/AccentGenericButtonColor"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -65,11 +65,11 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:onClick="setToDatabase"
-            android:text="Confirm"
+            android:text="@string/confirm"
             android:textAllCaps="true"
             android:textColor="@color/AccentGenericButtonColor"
             android:textStyle="bold"
@@ -104,10 +104,11 @@
                 style="@style/Widget.AppCompat.EditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="@color/AccentGenericButtonColor"
-                android:ems="10"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/browser_actions_bg_grey"
+                android:contentDescription="@string/recipe_description_req"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:lineSpacingExtra="8sp"
                 android:selectAllOnFocus="false"
@@ -120,15 +121,15 @@
                 android:id="@+id/newRecipeName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="@color/AccentGenericButtonColor"
-                android:ems="10"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/browser_actions_bg_grey"
                 android:inputType="textPersonName"
                 android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipenameTV" />
+                app:layout_constraintTop_toBottomOf="@+id/recipenameTV"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/recipeDescriptionTV"
@@ -136,7 +137,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Recipe Description *"
+                android:labelFor="@id/newRecipeDescription"
+                android:text="@string/recipe_description_req"
+                android:textColor="@color/Black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newRecipeName" />
 
@@ -146,7 +149,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
-                android:text="Recipe Name *"
+                android:labelFor="@id/newRecipeName"
+                android:text="@string/recipe_name_req"
+                android:textColor="@color/Black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -167,7 +172,7 @@
                     android:backgroundTint="@color/AccentGenericButtonColor"
                     android:enabled="false"
                     android:onClick="tagsCheckbox"
-                    android:text="Normal"
+                    android:text="@string/normal"
                     app:layout_constraintStart_toEndOf="@+id/simpleCheck"
                     app:layout_constraintTop_toBottomOf="@+id/simplicityText" />
 
@@ -180,7 +185,7 @@
                     android:backgroundTint="@color/AccentGenericButtonColor"
                     android:enabled="false"
                     android:onClick="tagsCheckbox"
-                    android:text="Hard"
+                    android:text="@string/hard"
                     app:layout_constraintStart_toEndOf="@+id/normalCheck"
                     app:layout_constraintTop_toBottomOf="@+id/simplicityText" />
 
@@ -193,7 +198,7 @@
                     android:backgroundTint="@color/AccentGenericButtonColor"
                     android:enabled="false"
                     android:onClick="tagsCheckbox"
-                    android:text="Simple"
+                    android:text="@string/simple"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/simplicityText" />
 
@@ -203,8 +208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="How simple is your recipe? *"
-                    android:textSize="10sp"
+                    android:text="@string/how_simple_is_your_recipe"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -215,7 +219,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="32dp"
                     android:onClick="privacySwitch"
-                    android:text="Private Recipe   "
+                    android:text="@string/private_recipe"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/normalCheck" />
 
@@ -238,7 +242,7 @@
                     android:layout_marginTop="8dp"
                     android:backgroundTint="@color/AccentGenericButtonColor"
                     android:onClick="tagsCheckbox"
-                    android:text="Vegetarian"
+                    android:text="@string/str_veg"
                     app:layout_constraintStart_toEndOf="@+id/veganCheck"
                     app:layout_constraintTop_toBottomOf="@+id/preferenceText" />
 
@@ -250,7 +254,7 @@
                     android:layout_marginTop="8dp"
                     android:backgroundTint="@color/AccentGenericButtonColor"
                     android:onClick="tagsCheckbox"
-                    android:text="Pescatarian"
+                    android:text="@string/str_pesc"
                     app:layout_constraintStart_toEndOf="@+id/vegCheck"
                     app:layout_constraintTop_toBottomOf="@+id/preferenceText" />
 
@@ -263,7 +267,7 @@
                     android:backgroundTint="@color/AccentGenericButtonColor"
                     android:checked="false"
                     android:onClick="tagsCheckbox"
-                    android:text="Vegan"
+                    android:text="@string/str_vegan"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/preferenceText" />
 
@@ -273,8 +277,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Is your recipe for any specific dietary practice?"
-                    android:textSize="10sp"
+                    android:text="@string/is_your_recipe_for_any_specific_dietary_practice"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

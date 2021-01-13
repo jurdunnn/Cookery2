@@ -24,9 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Login in now to enjoy cooking with your friends"
-            android:textAlignment="center"
-            android:textSize="10sp" />
+            android:text="@string/login_pre_signInText"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/googleButton"
@@ -38,7 +37,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/googleButtonColor"
             android:onClick="noAction"
-            android:text="CONTINUE WITH GOOGLE"
+            android:text="@string/continue_with_google_button"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
@@ -51,7 +50,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/facebookButtonColor"
             android:onClick="noAction"
-            android:text="CONTINUE WITH FACEBOOK"
+            android:text="@string/continue_with_facebook_button"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
@@ -85,6 +84,7 @@
             android:id="@+id/imageView2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:contentDescription="@string/cookery_logo_contentDescription"
             android:scaleType="centerCrop"
             android:scaleX="0.5"
             android:scaleY="0.5"

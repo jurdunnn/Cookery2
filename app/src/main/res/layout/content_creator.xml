@@ -17,7 +17,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@color/AccentGenericButtonColor"
-        android:text="Create Recipe"
+        android:text="@string/create_recipe"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textStyle="bold"

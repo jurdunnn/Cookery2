@@ -40,45 +40,20 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/userContainerInner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/postAddImageButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:drawableStart="@drawable/ic_image_24dp"
-                    android:text="@string/image"
-                    android:textColor="@color/AccentGenericButtonColor"
-                    app:layout_constraintEnd_toStartOf="@+id/postButton"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView2" />
-
-                <Button
-                    android:id="@+id/postButton"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post"
-                    android:textColor="@color/AccentGenericButtonColor"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView2"
-                    app:layout_constraintVertical_bias="0.0" />
+                android:layout_height="wrap_content"
+                android:padding="8dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/profileImage"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:clickable="true"
+                    android:focusable="true"
                     android:onClick="openProfileActivity"
                     android:scaleType="fitXY"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/user"
-                    android:focusable="true" />
+                    app:srcCompat="@drawable/user" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView2"
@@ -96,18 +71,11 @@
                     app:layout_constraintStart_toEndOf="@+id/profileImage"
                     app:layout_constraintTop_toTopOf="@+id/profileImage">
 
-                    <EditText
-                        android:id="@+id/postEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/white"
-                        android:gravity="start|top"
-                        android:hint="@string/post_an_update_hint"
-                        android:importantForAutofill="no"
-                        android:inputType="textMultiLine"
-                        android:padding="2dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColorHint="@color/defaultGray" />
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/post_an_update_hint" />
 
                     <ProgressBar
                         android:id="@+id/mainAProgressBar"

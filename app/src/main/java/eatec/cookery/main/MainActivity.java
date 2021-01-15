@@ -12,6 +12,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import eatec.cookery.R;
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private List<post> listPosts;
 
     /*Views and buttons*/
-    private Button postButton, addImageButton;
+    private ImageButton postButton, addImageButton;
     private EditText postContainer;
 
     //adaptor and recycler view
@@ -159,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         //get the key of the posts
         postID = posts.push().getKey();
 
-        //onclick for uploading an image along side a post
+        /*//onclick for uploading an image along side a post
         addImageButton = findViewById(R.id.postAddImageButton);
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +180,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 postUpdate(); // post an update to the database.
             }
+        });*/
+
+        CardView postUpdate = findViewById(R.id.cardView2);
+        postUpdate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                postUpdate();
+            }
         });
+
     }
 
     /*Get the users details such as their username and image and display it on screen*/
@@ -213,13 +224,16 @@ public class MainActivity extends AppCompatActivity {
 
     /*Post and update to feed, for all users whom follow said user to view.*/
     public void postUpdate() {
-        //If the input is not empty, get a time stamp and upload to the database
+
+        //load post activity
+        startActivity(new Intent(MainActivity.this, createPost.class));
+/*        //If the input is not empty, get a time stamp and upload to the database
         if (!postContainer.getText().toString().equals("")) {
             String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
             post post;
             //if it has not been uploaded then:
-            /*Spaghetti below is to do with the choices between uploading an image with text / without text
-             * or not uploading an image at all. TODO: change this */
+            *//*Spaghetti below is to do with the choices between uploading an image with text / without text
+             * or not uploading an image at all. TODO: change this *//*
             if (!hasUploaded) {
                 post = new post(mAuth.getUid(), postContainer.getText().toString(), null, null, 0, currentDateTimeString);
             } else {
@@ -234,11 +248,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "You cannot post an empty update.", Toast.LENGTH_SHORT).show();
         }
-        addImageButton.setText("Image");
-        addImageButton.setTextSize(14);
+        *//*addImageButton.setText("Image");
+        addImageButton.setTextSize(14);*//*
         upload = "";
         hasUploaded = true;
-        postID = posts.push().getKey(); //upload
+        postID = posts.push().getKey(); //upload*/
     }
 
     /*Open creator activity*/
@@ -367,8 +381,8 @@ public class MainActivity extends AppCompatActivity {
     private void uploadFile() {
         if (mImageUri != null) {
             final StorageReference fileReference = mStorageRef.child(postID + "." + getFileExtension(mImageUri));
-            addImageButton.setText(fileReference.toString());
-            addImageButton.setTextSize(8);
+           /* addImageButton.setText(fileReference.toString());
+            addImageButton.setTextSize(8);*/
             fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override

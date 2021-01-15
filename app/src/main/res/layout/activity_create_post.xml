@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".main.createPost">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/postFinalActionsLayout"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/postCancelButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="cancel"
+            android:text="@string/cancel"
+            android:textColor="@android:color/white"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/postPostButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="confirmPost"
+            android:text="@string/post"
+            android:textColor="@android:color/white"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/postVanityImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/post_an_update_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/postPostButton"
+            app:layout_constraintStart_toEndOf="@+id/postCancelButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_message_24_white" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/postPostContentLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postFinalActionsLayout">
+
+        <ImageView
+            android:id="@+id/postPostProfilePicture"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/user" />
+
+        <TextView
+            android:id="@+id/postPostUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/prompt_username"
+            app:layout_constraintStart_toEndOf="@+id/postPostProfilePicture"
+            app:layout_constraintTop_toTopOf="@+id/postPostProfilePicture" />
+
+        <TextView
+            android:id="@+id/postPostVia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="via post"
+            android:textColor="@color/defaultGray"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/postPostUsername"
+            app:layout_constraintStart_toEndOf="@+id/postPostUsername" />
+
+        <EditText
+            android:id="@+id/postPostContent"
+            android:layout_width="282dp"
+            android:layout_height="116dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:autoText="false"
+            android:backgroundTint="@android:color/white"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="What would you like to share?"
+            android:inputType="textMultiLine"
+            app:layout_constraintStart_toEndOf="@+id/postPostProfilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/postPostUsername" />
+
+        <ImageView
+            android:id="@+id/postPostLocationImage"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="64dp"
+            app:layout_constraintEnd_toEndOf="@+id/postPostProfilePicture"
+            app:layout_constraintStart_toStartOf="@+id/postPostProfilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/postPostContent"
+            app:srcCompat="@drawable/location_48" />
+
+        <TextView
+            android:id="@+id/postPostAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="at"
+            android:textColor="@color/defaultGray"
+            app:layout_constraintBottom_toBottomOf="@+id/postPostLocationImage"
+            app:layout_constraintStart_toEndOf="@+id/postPostLocationImage"
+            app:layout_constraintTop_toTopOf="@+id/postPostLocationImage" />
+
+        <TextView
+            android:id="@+id/postPostLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="location..."
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/postPostLocationImage"
+            app:layout_constraintStart_toEndOf="@+id/postPostAt"
+            app:layout_constraintTop_toTopOf="@+id/postPostLocationImage" />
+
+        <ImageView
+            android:id="@+id/postPostPeopleImage"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="64dp"
+            app:layout_constraintEnd_toEndOf="@+id/postPostLocationImage"
+            app:layout_constraintStart_toStartOf="@+id/postPostLocationImage"
+            app:layout_constraintTop_toBottomOf="@+id/postPostLocationImage"
+            app:srcCompat="@drawable/person_pin_48" />
+
+        <TextView
+            android:id="@+id/postPostWith"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="with"
+            android:textColor="@color/defaultGray"
+            app:layout_constraintBottom_toBottomOf="@+id/postPostPeopleImage"
+            app:layout_constraintStart_toEndOf="@+id/postPostPeopleImage"
+            app:layout_constraintTop_toTopOf="@+id/postPostPeopleImage" />
+
+        <TextView
+            android:id="@+id/postPostPeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="people..."
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/postPostPeopleImage"
+            app:layout_constraintStart_toEndOf="@+id/postPostWith"
+            app:layout_constraintTop_toTopOf="@+id/postPostPeopleImage" />
+
+        <ImageView
+            android:id="@+id/postPostCameraImage"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="64dp"
+            app:layout_constraintEnd_toEndOf="@+id/postPostPeopleImage"
+            app:layout_constraintStart_toStartOf="@+id/postPostPeopleImage"
+            app:layout_constraintTop_toBottomOf="@+id/postPostPeopleImage"
+            app:srcCompat="@drawable/camera_48" />
+
+        <ImageView
+            android:id="@+id/postPostUploadedImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postPostCameraImage"
+            app:layout_constraintTop_toTopOf="@+id/postPostCameraImage"
+            app:srcCompat="@android:drawable/screen_background_light" />
+
+        <TextView
+            android:id="@+id/postPostUploadImageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="an image..."
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/postPostCameraImage"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toTopOf="@+id/postPostCameraImage" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="add"
+            android:textColor="@color/defaultGray"
+            app:layout_constraintBottom_toBottomOf="@+id/postPostCameraImage"
+            app:layout_constraintStart_toEndOf="@+id/postPostCameraImage"
+            app:layout_constraintTop_toTopOf="@+id/postPostCameraImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

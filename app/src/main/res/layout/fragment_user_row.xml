@@ -22,6 +22,7 @@
             android:id="@+id/rowImage"
             android:layout_width="42dp"
             android:layout_height="42dp"
+            android:contentDescription="@string/cookery_logo_contentDescription"
             android:scaleType="fitXY"
             android:src="@drawable/cookery_logo_round"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/transparent"
-            android:textSize="8sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Cookery Rank"
+                android:text="@string/cookery_rank"
                 android:textSize="@dimen/default_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleText" />
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Title"
+                android:text="@string/title"
                 android:textSize="@dimen/default_heading"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"

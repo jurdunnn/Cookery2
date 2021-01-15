@@ -115,6 +115,18 @@
     <string name="userid">userID</string>
     <string name="postid">postID</string>
     <string name="post_image">post image</string>
+    <string name="title">Title</string>
+    <string name="description">description</string>
+    <string name="report">Report</string>
+    <string name="favourite">Favourite</string>
+    <string name="unfavourite">Unfavourite</string>
+    <string name="recipe_has_been_reported">Recipe has been reported</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="recipeid">recipeID</string>
+    <string name="cookery">Cookery</string>
+    <string name="beta">Beta</string>
+    <string name="home">Home</string>
 
 
 </resources>

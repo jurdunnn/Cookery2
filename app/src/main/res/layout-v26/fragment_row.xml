@@ -32,7 +32,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="365dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <FrameLayout
                     android:layout_width="0dp"
@@ -57,8 +58,7 @@
                         android:layout_gravity="right"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
-                        android:contentDescription="Recipe has been reported"
+                        android:contentDescription="@string/recipe_has_been_reported"
                         android:tooltipText="This recipe has been reported as inappropriate"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_report_problem_24dp" />
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="8dp"
-                    android:text="Title"
+                    android:text="@string/title"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textSize="20sp"
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
                     android:layout_marginTop="8dp"
-                    android:text="description"
+                    android:text="@string/description"
                     android:textAlignment="center"
                     android:textSize="12sp" />
 
@@ -98,11 +98,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:text="recipeID"
+                    android:text="@string/recipeid"
                     android:textAlignment="textEnd"
                     android:textColor="@android:color/white"
-                    android:textSize="8sp"
                     tools:visibility="visible" />
 
                 <LinearLayout
@@ -119,11 +119,11 @@
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_delete_forever_24dp"
-                        android:text="Delete"
+                        android:drawableStart="@drawable/ic_delete_forever_24dp"
+                        android:text="@string/delete"
                         android:textColor="@android:color/holo_red_dark" />
 
                     <Button
@@ -131,11 +131,11 @@
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_edit_24dp"
-                        android:text="Edit"
+                        android:drawableStart="@drawable/ic_edit_24dp"
+                        android:text="@string/edit"
                         android:textColor="@color/genericButtonColor" />
 
                 </LinearLayout>
@@ -143,7 +143,7 @@
                 <LinearLayout
                     android:id="@+id/recipeViewButtonsLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     android:visibility="gone">
@@ -157,7 +157,7 @@
                         android:layout_marginRight="16dp"
                         android:layout_weight="1"
                         android:drawableStart="@drawable/ic_report_24dp"
-                        android:text="Report"
+                        android:text="@string/report"
                         android:textColor="@color/googleButtonColor" />
 
                     <Button
@@ -169,7 +169,7 @@
                         android:layout_marginRight="16dp"
                         android:layout_weight="1"
                         android:drawableStart="@drawable/ic_star_border_24dp"
-                        android:text="Favourite"
+                        android:text="@string/favourite"
                         android:textColor="@color/genericButtonColor" />
 
                     <Button
@@ -181,7 +181,7 @@
                         android:layout_marginRight="16dp"
                         android:layout_weight="1"
                         android:drawableStart="@drawable/ic_star_24dp"
-                        android:text="Unfavourite"
+                        android:text="@string/unfavourite"
                         android:textColor="@color/genericButtonColor"
                         android:visibility="gone" />
                 </LinearLayout>

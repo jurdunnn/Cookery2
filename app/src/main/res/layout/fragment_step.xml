@@ -33,9 +33,7 @@
                 android:id="@+id/stepFragStepID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:textColor="@android:color/white"
-                android:textSize="8sp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,14 +50,16 @@
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stepRecipeShortTextTV" />
+                app:layout_constraintTop_toBottomOf="@+id/stepRecipeShortTextTV"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/stepRecipeShortTextTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Step Description"
+                android:labelFor="@id/stepRecipeShortText"
+                android:text="@string/content_description"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"

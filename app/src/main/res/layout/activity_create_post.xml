@@ -119,28 +119,30 @@
             app:layout_constraintEnd_toEndOf="@+id/postPostProfilePicture"
             app:layout_constraintStart_toStartOf="@+id/postPostProfilePicture"
             app:layout_constraintTop_toBottomOf="@+id/postPostContent"
-            app:srcCompat="@drawable/location_48" />
+            app:srcCompat="@drawable/ic_baseline_menu_book_24" />
 
         <TextView
-            android:id="@+id/postPostAt"
+            android:id="@+id/postPostLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:text="at"
+            android:text="link"
             android:textColor="@color/defaultGray"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/postPostLocationImage"
             app:layout_constraintStart_toEndOf="@+id/postPostLocationImage"
             app:layout_constraintTop_toTopOf="@+id/postPostLocationImage" />
 
         <TextView
-            android:id="@+id/postPostLocation"
+            android:id="@+id/postPostRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="location..."
+            android:text="recipe..."
             android:textStyle="bold"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/postPostLocationImage"
-            app:layout_constraintStart_toEndOf="@+id/postPostAt"
+            app:layout_constraintStart_toEndOf="@+id/postPostLink"
             app:layout_constraintTop_toTopOf="@+id/postPostLocationImage" />
 
         <ImageView
@@ -154,11 +156,11 @@
             app:srcCompat="@drawable/person_pin_48" />
 
         <TextView
-            android:id="@+id/postPostWith"
+            android:id="@+id/postPostTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:text="with"
+            android:text="tag"
             android:textColor="@color/defaultGray"
             app:layout_constraintBottom_toBottomOf="@+id/postPostPeopleImage"
             app:layout_constraintStart_toEndOf="@+id/postPostPeopleImage"
@@ -172,7 +174,7 @@
             android:text="people..."
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/postPostPeopleImage"
-            app:layout_constraintStart_toEndOf="@+id/postPostWith"
+            app:layout_constraintStart_toEndOf="@+id/postPostTag"
             app:layout_constraintTop_toTopOf="@+id/postPostPeopleImage" />
 
         <ImageView
@@ -180,6 +182,7 @@
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginTop="64dp"
+            android:onClick="addImage"
             app:layout_constraintEnd_toEndOf="@+id/postPostPeopleImage"
             app:layout_constraintStart_toStartOf="@+id/postPostPeopleImage"
             app:layout_constraintTop_toBottomOf="@+id/postPostPeopleImage"
@@ -190,7 +193,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -203,22 +206,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:onClick="addImage"
             android:text="an image..."
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/postPostCameraImage"
-            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintStart_toEndOf="@+id/postPostUploadImagePrefix"
             app:layout_constraintTop_toTopOf="@+id/postPostCameraImage" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/postPostUploadImagePrefix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:onClick="addImage"
             android:text="add"
             android:textColor="@color/defaultGray"
             app:layout_constraintBottom_toBottomOf="@+id/postPostCameraImage"
             app:layout_constraintStart_toEndOf="@+id/postPostCameraImage"
             app:layout_constraintTop_toTopOf="@+id/postPostCameraImage" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:progressTint="@color/colorPrimaryDark"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postPostRecipeList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postPostContent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

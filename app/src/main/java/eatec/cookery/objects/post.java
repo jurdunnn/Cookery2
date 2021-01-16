@@ -52,4 +52,29 @@ public class post {
     public String getmDateTime() {
         return mDateTime;
     }
+
+    //setters
+    public void setmUserID(String mUserID) {
+        this.mUserID = mUserID;
+    }
+
+    public void setmContent(String mContent) {
+        this.mContent = mContent;
+    }
+
+    public void setmRecipeID(String mRecipeID) {
+        this.mRecipeID = mRecipeID;
+    }
+
+    public void setmImage(String mImage) {
+        this.mImage = mImage;
+    }
+
+    public void setmLikes(int mLikes) {
+        this.mLikes = mLikes;
+    }
+
+    public void setmDateTime(String mDateTime) {
+        this.mDateTime = mDateTime;
+    }
 }

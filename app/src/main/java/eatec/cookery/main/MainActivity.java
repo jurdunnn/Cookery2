@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,7 +34,6 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -44,6 +42,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import eatec.cookery.R;
+import eatec.cookery.createPost.createPost;
 import eatec.cookery.creator.CreatorActivity;
 import eatec.cookery.favourites.FavouritesActivity;
 import eatec.cookery.login.LoginPreActivity;

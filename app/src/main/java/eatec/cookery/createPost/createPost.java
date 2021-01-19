@@ -1,14 +1,15 @@
-package eatec.cookery.main;
+package eatec.cookery.createPost;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -33,11 +34,16 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import eatec.cookery.R;
+import eatec.cookery.main.MainActivity;
 import eatec.cookery.objects.post;
+import eatec.cookery.objects.recipe;
 import eatec.cookery.objects.user;
+import eatec.cookery.recipes.RecipeAdaptor;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class createPost extends AppCompatActivity {
@@ -62,6 +68,11 @@ public class createPost extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private String imageURL;
     private StorageReference storageReference;
+
+    //adapter
+    private createPostAdapter createPostAdapter;
+    private RecyclerView recipeRecyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +103,14 @@ public class createPost extends AppCompatActivity {
 
         //get a new post ID
         postID = postsReference.push().getKey();
+
+        //set Adapter
+        createPostAdapter = new createPostAdapter();
+        recipeRecyclerView = findViewById(R.id.postPostRecipeList);
+
+        recipeRecyclerView.setHasFixedSize(true);
+        recipeRecyclerView.setLayoutManager(new LinearLayoutManager(createPost.this));
+        recipeRecyclerView.setAdapter(createPostAdapter);
     }
 
     public void confirmPost(View view){
@@ -165,13 +184,18 @@ public class createPost extends AppCompatActivity {
         });
     }
 
-    private void addPeople(){
-        //click show text box
-        //suggest list of users - default users you follow
-        // match with what the user is typing
+    public void addRecipe(View view){
+        TextView linkText = findViewById(R.id.postPostLink);
+        TextView recipeText = findViewById(R.id.postPostRecipe);
+        ImageView recipeBookImage = findViewById(R.id.postPostLocationImage);
+
+        linkText.setVisibility(View.INVISIBLE);
+        recipeText.setVisibility(View.INVISIBLE);
+        recipeBookImage.setVisibility(View.INVISIBLE);
+        recipeRecyclerView.setVisibility(View.VISIBLE);
     }
 
-    private void addLocation(){
+    private void addPeople(){
         //click show text box
         //suggest locations
     }

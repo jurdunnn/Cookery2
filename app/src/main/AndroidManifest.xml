@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/cookery_icon_black_border"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.createPost"></activity>
+        <activity android:name=".createPost.createPost"></activity>
         <activity
             android:name=".other.FeedbackActivity"
             android:theme="@style/AppTheme.NoActionBar" />

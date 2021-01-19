@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".main.createPost">
+    tools:context=".createPost.createPost">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/postFinalActionsLayout"
@@ -116,6 +116,7 @@
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginTop="64dp"
+            android:onClick="addRecipe"
             app:layout_constraintEnd_toEndOf="@+id/postPostProfilePicture"
             app:layout_constraintStart_toStartOf="@+id/postPostProfilePicture"
             app:layout_constraintTop_toBottomOf="@+id/postPostContent"
@@ -126,6 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:onClick="addRecipe"
             android:text="link"
             android:textColor="@color/defaultGray"
             android:visibility="visible"
@@ -138,6 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:onClick="addRecipe"
             android:text="recipe..."
             android:textStyle="bold"
             android:visibility="visible"
